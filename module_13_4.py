@@ -24,12 +24,12 @@ async def start(message):
 
 
 @dp.message_handler(text='Calories')
-async def set_age(message):#хендлер для работы с состояниями (FSM)
+async def set_age(message):
     await message.answer('Введите свой возраст (полных лет):')#внутри функции мы оправляем сообщение с просьбой сообщить возраст
     await UserState.age.set()#установка состояния и запись возраста клиента
 
 @dp.message_handler(state=UserState.age)#хендлер состояния, ожидает поступления сообщения с возрастом
-async def set_growth(message, state):#хендлер для работы с состояниями (FSM)
+async def set_growth(message, state):
     await state.update_data(age=message.text)#записываем в словарь 'age'
     await message.answer('Введите свой рост (см):')#возврат заказчику сообщения с просьбой сообщить рост
     await UserState.growth.set()#установка состояния и запись роста клиента
@@ -41,7 +41,7 @@ async def set_weight(message, state):#хендлер для работы с со
     await UserState.weight.set()#установка состояния и запись веса клиента
 
 @dp.message_handler(state=UserState.weight)#хендлер состояния, ожидает поступления сообщения с весом
-async def send_calories(message, state):#хендлер для работы с состояниями (FSM)
+async def send_calories(message, state):
     await state.update_data(weight=message.text)# записываем в словарь 'weight'
     data = await state.get_data()#для получение  данных состояния после их обновления
 
