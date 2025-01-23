@@ -35,7 +35,7 @@ async def set_growth(message, state):
     await UserState.growth.set()#установка состояния и запись роста клиента
 
 @dp.message_handler(state=UserState.growth)#хендлер состояния, ожидает поступления сообщения с ростом
-async def set_weight(message, state):#хендлер для работы с состояниями (FSM)
+async def set_weight(message, state):
     await state.update_data(growth=message.text)#записываем в словарь 'growth'
     await message.answer("Введите свой вес (кг):")#возврат заказчику сообщения с просьбой сообщить свой вес
     await UserState.weight.set()#установка состояния и запись веса клиента
